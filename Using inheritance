@@ -1,0 +1,46 @@
+#include<iostream>
+using namespace std;
+class Calculator {
+  protected:
+    int n; 
+    int *arr; 
+    double sum; 
+  public:
+    Calculator(int n) {
+      this->n = n;
+      arr = new int[n];
+      sum = 0;
+    }
+    void inputNumbers() {
+      cout << "\nEnter the " << n << " numbers:" << endl;
+      for (int i = 0; i < n; i++) {
+        cout << "Enter the number " << i + 1 << ": ";
+        cin >> arr[i];
+        sum += arr[i]; 
+      }
+    } 
+    virtual void calculateSum() {
+      cout << "Sum of " << n << " numbers: " << sum << endl;
+    }
+};
+class Average : public Calculator {
+  private:
+    double avg;
+  public:
+    Average(int n) : Calculator(n) {
+      avg = 0;
+    }
+    void calculateSum() override {
+      Calculator::calculateSum();
+      avg = sum / n; 
+      cout << "Average of " << n << " numbers: " << avg << endl;
+    }
+};
+int main() {
+  int n;
+  cout << "Enter the number of elements: ";
+  cin >> n;
+  Average a(n); 
+  a.inputNumbers(); 
+  a.calculateSum(); 
+}
