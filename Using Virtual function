@@ -1,0 +1,49 @@
+#include <iostream>
+using namespace std;
+class Number {
+    protected:
+        double value;
+    public:
+       
+        Number(double v) {
+            value = v;
+        }
+      
+        virtual double getValue() {
+            return value;
+        }
+};
+class Average : public Number {
+    private:
+        int count; 
+        double sum; 
+    public:
+        Average(int c, double s) : Number(0) {
+            count = c;
+            sum = s;
+        }
+        double getValue() override {
+            value = sum / count;
+            return value;
+        }
+};
+
+int main() {
+    Number* numbers[5];
+    numbers[0] = new Number(10);
+    numbers[1] = new Number(20);
+    numbers[2] = new Number(30);
+    numbers[3] = new Number(40);
+    numbers[4] = new Number(50);
+    double sum = 0;
+    for (int i = 0; i < 5; i++) {
+        sum += numbers[i]->getValue();
+    }
+    Average* avg = new Average(5, sum);
+    cout << "The average of the five numbers is " << avg->getValue() << endl;
+    for (int i = 0; i < 5; i++) {
+        delete numbers[i];
+    }
+    delete avg;
+    return 0;
+}
