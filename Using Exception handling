@@ -1,0 +1,27 @@
+#include<iostream>
+#include<exception>
+using namespace std;
+
+int main ()
+{
+    int n,i,a;
+    double sum=0;
+    double avg=0;
+    cout<<"\nEnter the no of elements:"<<endl;
+    try {
+        cin>>n;
+        if (n <= 0) throw invalid_argument("n must be positive");
+        for(i=0;i<n;i++)
+        {
+            cout<<"Enter the number"<<i+1<<": ";
+            cin>>a;
+            sum=sum+a;
+        }
+        avg = sum / n;
+        cout<<"Avg of "<<n<<" numbers : "<<avg<<endl;
+    }
+    catch (exception& e) {
+        cout<<"Error: "<<e.what()<<endl;
+    }
+    return 0;
+}
